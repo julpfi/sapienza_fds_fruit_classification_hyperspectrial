@@ -1,1 +1,0 @@
-# sapienza_fds_fruit_classification_hyperspectrial
