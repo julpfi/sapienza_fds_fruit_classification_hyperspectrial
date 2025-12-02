@@ -1,0 +1,15 @@
+# Environments
+venv/
+env/
+
+# Python cache
+__pycache__/
+
+# Models and Data (for now until we have decided on management here)
+pretrained_models/
+data/
+
+# Weights and Biases
+wandb/
+*.wandb
+.wandb
