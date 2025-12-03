@@ -1,15 +1,21 @@
-# Environments
+
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.eggs/
+build/
+dist/
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+.env
 venv/
 env/
-
-# Python cache
-__pycache__/
-
-# Models and Data (for now until we have decided on management here)
-pretrained_models/
 data/
-
-# Weights and Biases
+*.h5
+*.bin
+*.hdr
+*.pth
+*.pt
+checkpoints/
 wandb/
-*.wandb
-.wandb
