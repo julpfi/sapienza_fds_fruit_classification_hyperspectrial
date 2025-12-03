@@ -11,4 +11,4 @@ else
     echo "ERROR: Data folder not found. Make sure you mounted Drive!"
 fi
 
-echo ">>> Setup Complete!"
+echo "Setup complete!"
