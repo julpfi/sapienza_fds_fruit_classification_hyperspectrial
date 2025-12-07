@@ -34,6 +34,8 @@ class HyperspectralFruitDataset(Dataset):
         self.target_camera = camera_type
         self.img_size = img_size
 
+        print(json_path) # TODO REMOVE DEBUGGING 
+        print(data_root) # TODO REMOVE DEBUGGING 
         self.samples = self._parse_json(json_path)        
         self.band_reducer = BandReducer(strategy=band_strategy, target_bands=target_bands)
         self.transform = self._get_transforms(is_train=(split==DatasetSplit.TRAIN)) 
@@ -97,7 +99,7 @@ class HyperspectralFruitDataset(Dataset):
                 if label_str in LABEL_MAP:
                     full_hdr = os.path.join(self.data_root, rec['files']['header_file'])
                     full_bin = os.path.join(self.data_root, rec['files']['data_file'])
-                    
+                    print(full_bin) # TODO REMOVE DEBUGGING 
                     if os.path.exists(full_hdr) and os.path.exists(full_bin):
                         samples.append({
                             'hdr': full_hdr,
