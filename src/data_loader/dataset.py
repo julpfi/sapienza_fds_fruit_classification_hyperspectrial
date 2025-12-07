@@ -32,7 +32,7 @@ class HyperspectralFruitDataset(Dataset):
         self.data_root = data_root
         self.target_fruit = fruit_type
         self.target_camera = camera_type
-        
+        self.img_size = img_size
 
         self.samples = self._parse_json(json_path)        
         self.band_reducer = BandReducer(strategy=band_strategy, target_bands=target_bands)
