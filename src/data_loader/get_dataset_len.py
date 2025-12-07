@@ -1,9 +1,4 @@
-
-
-
 import os
-
-
 from src.data_loader.data_loader import get_data_loader
 from src.data_loader.enums import FruitType, CameraType, DatasetSplit
 from src.data_loader.dataset import HyperspectralFruitDataset
@@ -14,7 +9,7 @@ from src.data_loader.config import SPLIT_FILES
 CONFIG = {
     "project_name": "sapienza_fds_fruit_ripeness",
 
-    "run_name": "TEST_01", # TODO CHANGE FOR RUN
+    "run_name": "TEST_01", 
     "fruit": FruitType.KIWI,
     "camera": CameraType.FX10,
 
