@@ -18,9 +18,9 @@ class HyperspectralFruitDataset(Dataset):
                  split: DatasetSplit, 
                  fruit_type: FruitType,
                  camera_type: CameraType = None,
-                 band_strategy='uniform', 
+                 band_selection=None,
+                 band_reduction='uniform', 
                  target_bands=30, 
-                 selection_bounds=None,
                  img_size=(64, 64)):
 
         """
@@ -29,7 +29,7 @@ class HyperspectralFruitDataset(Dataset):
             data_root: path to root folder holding hyperspectrial data (.hdr and .bin files)
             fruit_type: enum see py file (e.g. FruitType.AVOCADO)
             camera_type: enum see py file (e.g. CameraType.FX10)
-            band_strategy: strategy for band reduction 
+            band_reduction: strategy for band reduction 
             target_bands: number of bands after reduction 
             selection_bounds: (min_nm, max_nm) to select specific wavelength range
             img_size: desired image size (Height, Width)
@@ -43,7 +43,7 @@ class HyperspectralFruitDataset(Dataset):
         self.samples = self._parse_json(json_path)        
 
         self.band_selector = BandSelector(self.wavelengths, selection_bounds)
-        self.band_reducer = BandReducer(strategy=band_strategy, target_bands=target_bands)        
+        self.band_reducer = BandReducer(strategy=band_reduction, target_bands=target_bands)        
         self.transform = self._get_transforms(is_train=(split==DatasetSplit.TRAIN)) 
 
 

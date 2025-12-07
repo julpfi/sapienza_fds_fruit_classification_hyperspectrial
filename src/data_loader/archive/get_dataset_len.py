@@ -1,9 +1,9 @@
 import os
 from src.data_loader.data_loader import get_data_loader
-from src.data_loader.enums import FruitType, CameraType, DatasetSplit
+from src.data_loader.utils.enums import FruitType, CameraType, DatasetSplit
 from src.data_loader.dataset import HyperspectralFruitDataset
-from src.data_loader.enums import DatasetSplit
-from src.data_loader.config import SPLIT_FILES
+from src.data_loader.utils.enums import DatasetSplit
+from src.data_loader.utils.config import SPLIT_FILES
 
 
 CONFIG = {

@@ -1,4 +1,4 @@
-from src.data_loader.enums import CameraType, RipenessLabel, DatasetSplit
+from src.data_loader.utils.enums import CameraType, RipenessLabel, DatasetSplit
 
 CAMERA_SPECS = {
     CameraType.FX10: {

@@ -2,8 +2,8 @@ import os
 from torch.utils.data import DataLoader
 
 from src.data_loader.dataset import HyperspectralFruitDataset
-from src.data_loader.enums import DatasetSplit 
-from src.data_loader.config import SPLIT_FILES
+from src.data_loader.utils.enums import DatasetSplit 
+from src.data_loader.utils.config import SPLIT_FILES
 
 
 def get_data_loader(CONFIG:dict, split: DatasetSplit, shuffle=False):
@@ -24,7 +24,8 @@ def get_data_loader(CONFIG:dict, split: DatasetSplit, shuffle=False):
         split=split,
         fruit_type=CONFIG['fruit'],
         camera_type=CONFIG['camera'],
-        band_strategy=CONFIG['band_strategy'],
+        band_reduction=CONFIG['band_reduction'],
+        band_selection=CONFIG['band_selection'],
         target_bands=CONFIG['bands'],
         img_size=CONFIG['img_size']
     )
