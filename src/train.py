@@ -15,26 +15,31 @@ from src.data_loader.utils.enums import FruitType, CameraType, DatasetSplit
 #-------------------- Configuration -------------------------
 
 CONFIG = {
-    # Names for wandd 
+    # Names for wandb 
     "project_name": "sapienza_fds_fruit_ripeness",
-    "run_name": "Attention CNN Model - all bands wiht first conv",
+    
+    # --- MODIFICA 3: Cambia il nome della run per riconoscerla ---
+    "run_name": "LitSpectralTransformer - First Run",
     
     # Model and data 
-    "model_type": "attention_combined_cnn",
+    # --- MODIFICA 4: Seleziona il tuo modello ---
+    "model_type": "spectral_transformer", 
+    
     "fruit": FruitType.KIWI,
     "camera": CameraType.FX10,
-    "bands": 224,
-    "band_selection": None,
-    "band_reduction": all,
+    "bands": 30,                # Questo valore verrà passato come 'in_channels'
+    "band_reduction": "uniform",
+    "band_selection": (700, 1100),
     "img_size": (224, 224),
     
     # Hyperparameters
     "batch_size": 16,
-    "epochs": 30,
+    "epochs": 20,
     "lr": 1e-4,
     "num_workers": 2,
     
     # Paths (mounted drive)
+    # Assicurati che questi percorsi siano corretti per il tuo ambiente
     "data_root": "/content/drive/MyDrive/sapienza_fds_fruit_classification/data",
     "json_root": "/content/drive/MyDrive/sapienza_fds_fruit_classification/data/dataset",
     "save_dir": "/content/drive/MyDrive/sapienza_fds_fruit_classification/checkpoints"
