@@ -17,20 +17,20 @@ from src.data_loader.utils.enums import FruitType, CameraType, DatasetSplit
 CONFIG = {
     # Names for wandd 
     "project_name": "sapienza_fds_fruit_ripeness",
-    "run_name": "Attention CNN Model - first run",
+    "run_name": "Attention CNN Model - all bands wiht first conv",
     
     # Model and data 
     "model_type": "attention_combined_cnn",
     "fruit": FruitType.KIWI,
     "camera": CameraType.FX10,
-    "bands": 30,
-    "band_reduction": "uniform",
-    "band_selection": (700, 1100),
+    "bands": 224,
+    "band_reduction": None,
+    "band_selection": 'all',
     "img_size": (224, 224),
     
     # Hyperparameters
     "batch_size": 16,
-    "epochs": 20,
+    "epochs": 30,
     "lr": 1e-4,
     "num_workers": 2,
     
