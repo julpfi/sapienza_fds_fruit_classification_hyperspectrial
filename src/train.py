@@ -17,22 +17,22 @@ from src.data_loader.utils.enums import FruitType, CameraType, DatasetSplit
 CONFIG = {
     # Names for wandd 
     "project_name": "sapienza_fds_fruit_ripeness",
-    "run_name": "Test DeiT Model - First Run",
+    "run_name": "DeiT Model - Second Run",
     
     # Model and data 
     "model_type": "deit_tiny_distilled",
     "fruit": FruitType.KIWI,
     "camera": CameraType.FX10,
-    "bands": 30,
+    "bands": 10,
     "band_reduction": "uniform",
     "band_selection": (700, 1100),
     "img_size": (224, 224),
     
     # Hyperparameters
     "batch_size": 16,
-    "epochs": 15,
+    "epochs": 20,
     "lr": 1e-4,
-    "num_workers": 3,
+    "num_workers": 2,
     
     # Paths (mounted drive)
     "data_root": "/content/drive/MyDrive/sapienza_fds_fruit_classification/data",
