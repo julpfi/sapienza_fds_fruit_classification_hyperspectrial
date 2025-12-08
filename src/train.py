@@ -32,6 +32,7 @@ CONFIG = {
     "batch_size": 16,
     "epochs": 15,
     "lr": 1e-4,
+    "num_workers": 3,
     
     # Paths (mounted drive)
     "data_root": "/content/drive/MyDrive/sapienza_fds_fruit_classification/data",
