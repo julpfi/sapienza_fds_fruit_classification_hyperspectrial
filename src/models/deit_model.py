@@ -3,7 +3,7 @@ import torch.nn as nn
 import timm
 
 class DeiTModel(nn.Module):
-    def __init__(self, num_classes=3, input_bands=30, use_distillation=True, pretrained=True):
+    def __init__(self, num_classes=3, input_bands=10, use_distillation=True, pretrained=True):
         super().__init__()
         self.use_distillation = use_distillation
 
