@@ -1,4 +1,3 @@
-import torch
 import numpy as np
 from typing import Optional
 
@@ -21,18 +20,19 @@ class BandSelector:
             if len(selection_mask) == 0:
                 raise ValueError(f"BandSelector found no bands in the range from {min_nm} to {max_nm}nm.")
                 
-            self.indices = torch.from_numpy(selection_mask).long()
+            # Changed to simple numpy array (int) to match input data type
+            self.indices = selection_mask.astype(int)
             self.active_range = f"{min_nm}-{max_nm}nm"
             print(f"BandSelector Initialized: Keeping {len(self.indices)} bands ({self.active_range}).")
         else:
             print("BandSelector Initialized: No bounds specified. Keeping all bands.")
 
 
-    def __call__(self, x: torch.Tensor) -> torch.Tensor:
-        """ Applies band selection to the input tensor """
-        # If no indices were selected, return original tensor
+    def __call__(self, x: np.ndarray) -> np.ndarray:
+        """ Applies band selection to the input matrix """
+        # If no indices were selected, return original data
         if self.indices is None:
             return x
 
-        # Slice the channel dimension of tensor (dim 0)
-        return x[self.indices, ...]
+        # Slice the channel dimension of 3d np array(dim 2)
+        return x[:, :, self.indices]
