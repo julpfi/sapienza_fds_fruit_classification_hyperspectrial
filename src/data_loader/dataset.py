@@ -38,11 +38,12 @@ class HyperspectralFruitDataset(Dataset):
         self.target_fruit = fruit_type
         self.target_camera = camera_type
         self.img_size = img_size
-        
+        self.band_selection = band_selection
+
         self.wavelengths = [] 
         self.samples = self._parse_json(json_path)        
 
-        self.band_selector = BandSelector(self.wavelengths, selection_bounds)
+        self.band_selector = BandSelector(self.wavelengths, band_selection)
         self.band_reducer = BandReducer(strategy=band_reduction, target_bands=target_bands)        
         self.transform = self._get_transforms(is_train=(split==DatasetSplit.TRAIN)) 
 

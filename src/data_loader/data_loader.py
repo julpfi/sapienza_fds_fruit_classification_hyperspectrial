@@ -11,7 +11,7 @@ def get_data_loader(CONFIG:dict, split: DatasetSplit, shuffle=False):
     Wrapper: Creates a DataLoader for a specific Dataset and assocaited split (train, val, test)
     Automatically selects the correct JSON file
     """
-    
+
     # Resolve JSON path
     json_filename = SPLIT_FILES[split]
     json_path = os.path.join(CONFIG['json_root'], json_filename)
