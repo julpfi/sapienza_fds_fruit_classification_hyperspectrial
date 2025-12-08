@@ -35,6 +35,7 @@ CONFIG = {
     
     # Paths (mounted drive)
     "data_root": "/content/drive/MyDrive/sapienza_fds_fruit_classification/data",
+    "json_root": "/content/drive/MyDrive/sapienza_fds_fruit_classification/data/dataset",
     "save_dir": "/content/drive/MyDrive/sapienza_fds_fruit_classification/checkpoints"
 }
 
