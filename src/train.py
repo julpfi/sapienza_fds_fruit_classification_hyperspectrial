@@ -24,8 +24,8 @@ CONFIG = {
     "fruit": FruitType.KIWI,
     "camera": CameraType.FX10,
     "bands": 224,
-    "band_reduction": None,
-    "band_selection": 'all',
+    "band_selection": None,
+    "band_reduction": all,
     "img_size": (224, 224),
     
     # Hyperparameters
