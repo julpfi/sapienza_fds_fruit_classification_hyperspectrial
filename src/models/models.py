@@ -4,7 +4,6 @@ from src.models.attention_cnn_model import AttentionCNNModel
 # --- MODIFICA 1: Importiamo la tua nuova classe ---
 from src.models.lit_spectral_transformer import LitSpectralTransformer
 
-
 def get_model(model_type: str, pretrained: bool, num_classes: int, in_channels: int = 3):
     """
     Factory function per istanziare i modelli in base alla configurazione.
