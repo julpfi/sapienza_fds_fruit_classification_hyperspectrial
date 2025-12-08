@@ -61,7 +61,7 @@ def load_and_preprocess(header_path, bin_path):
         return None
     
     # Load fully into memory 
-    img_data = raw_obj.load() 
+    img_data = raw_obj.load().copy()
 
     # Clean
     img_data = mask_background(img_data)
