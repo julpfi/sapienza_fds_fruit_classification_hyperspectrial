@@ -8,8 +8,6 @@ class BandReducer:
 
     def __call__(self, img_data):
         # TODO Think about and add strategies -> aligned with models (e.g. also PCA again)
-        # TODO Connect this selectio to the model factory/selection 
-        # img_data shape is (H, W, Bands)
         h, w, c = img_data.shape
 
         if self.strategy == 'uniform':
@@ -22,7 +20,10 @@ class BandReducer:
             
         elif self.strategy == 'gaussian_average':
             return self._gaussian_average(img_data, c)
-    
+
+        elif self.strategy == 'dft':
+            return self._discrete_fourier_transformation(img_data)
+        
         else: 
          return img_data
        
@@ -71,3 +72,24 @@ class BandReducer:
         reduced_flat = np.dot(flat, weights)    
         return reduced_flat.reshape(img_data.shape[0], img_data.shape[1], self.target_bands)
  
+
+    def _discrete_fourier_transformation(self, img_data):
+        """
+        Implements a discrete fourier transformation(DFT) along the spectral channels 
+        It leverages a low-filter to reduce the number of bands
+        We only keep the magnitude of the first k frequency coefficients
+        """
+        
+        # Apply real fast fourier transformation along on spectral bands
+        fft_data = np.fft.rfft(img_data, axis=2)
+
+        # Low-pass fikter: Keep only the first k (=target_bands) coefficients
+        if self.target_bands > fft_data.shape[2]:
+            raise ValueError(f"Target bands {self.target_bands} cannot be larger than distinct FFT coefficients {fft_data.shape[2]}")   
+        fft_reduced = fft_data[:, :, :self.target_bands]
+
+        # Calculate the magnitue = absolute value of wave coefficients 
+        # Discard phase as we care about the signal's energy and not its shift
+        reduced_img = np.abs(fft_reduced)
+
+        return reduced_img
