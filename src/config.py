@@ -8,23 +8,23 @@ CONFIG = {
     
     # Names for wandd 
     "project_name": "sapienza_fds_fruit_ripeness",
-    "run_name": "Attention CNN Model - Gaussian Reduction to 30 Bands", 
+    "run_name": "Fruiths_net model - all bands", 
     
     #TODO NEW RUN: Updated run_name and update selection of model and data
     # Model and data 
     "fruit": FruitType.KIWI,
     "camera": CameraType.FX10,
     "num_classes": 3,
-    "model_type": defined_models[3],
-    "bands": [224, 30, 10, 3][1],
+    "model_type": defined_models[5],
+    "bands": [224, 30, 10, 3][0],
     "band_selection": [None, (700, 1100)][0],
-    "band_reduction": defined_band_reduction_strategies[3],
+    "band_reduction": defined_band_reduction_strategies[0],
     "img_size": [(224, 224), (64, 64)][0],
     
     # Hyperparameters
     "batch_size": 16,
     "epochs": 30,
-    "lr": 1e-4,
+    "lr": 1e-3,
     "num_workers": 2,
     
     # Paths (mounted drive)
