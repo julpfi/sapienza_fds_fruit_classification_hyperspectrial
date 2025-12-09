@@ -27,7 +27,7 @@ def get_model(config: dict):
     elif model_type == "attention_cnn":
         if reduction_strategy == "all" and in_channels > 30:
             return AttentionCNNModelUnselected(num_bands=in_channels, num_classes=num_classes)
-        elif reduction_strategy in ["uniform", "average", "gaussian_average"] and in_channels in [30, 10]: 
+        elif reduction_strategy != "all" and in_channels in [30, 10]: 
             return AttentionCNNSelection(num_bands=in_channels, num_classes=num_classes)
     
     raise ValueError(f"Unsupported model type: {model_type} or incompatible band reduction strategy: {reduction_strategy} for in_channels: {in_channels}")
