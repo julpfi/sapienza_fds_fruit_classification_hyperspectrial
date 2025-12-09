@@ -1,6 +1,6 @@
 from src.models.deit_model import DeiTModel
 from src.models.vit_model import VitModel
-from src.models.attention_cnn_model import AttentionCNNSelection, AttentionCNNModelUnselected
+from src.models.attention_cnn_model import AttentionCNNSelected, AttentionCNNModelUnselected
 from src.models.lit_spectral_transformer import LitSpectralTransformer
 from src.models.fruiths_net import FruitHSNet 
 
@@ -28,6 +28,6 @@ def get_model(config: dict):
         if reduction_strategy == "all" and in_channels > 30:
             return AttentionCNNModelUnselected(num_bands=in_channels, num_classes=num_classes)
         elif reduction_strategy != "all" and in_channels in [30, 10]: 
-            return AttentionCNNSelection(num_bands=in_channels, num_classes=num_classes)
+            return AttentionCNNSelected(num_bands=in_channels, num_classes=num_classes)
     
     raise ValueError(f"Unsupported model type: {model_type} or incompatible band reduction strategy: {reduction_strategy} for in_channels: {in_channels}")
