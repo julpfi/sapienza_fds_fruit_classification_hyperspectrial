@@ -15,7 +15,7 @@ CONFIG = {
     "fruit": FruitType.KIWI,
     "camera": CameraType.FX10,
     "num_classes": 3,
-    "model_type": defined_models[0],
+    "model_type": defined_models[3],
     "bands": [224, 30, 10, 3][1],
     "band_selection": [None, (700, 1100)][0],
     "band_reduction": defined_band_reduction_strategies[3],
