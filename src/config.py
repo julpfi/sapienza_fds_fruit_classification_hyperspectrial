@@ -8,7 +8,7 @@ CONFIG = {
     
     # Names for wandd 
     "project_name": "sapienza_fds_fruit_ripeness",
-    "run_name": "Attention CNN Model - all bands wiht first conv", 
+    "run_name": "Attention CNN Model - Gaussian Reduction to 30 Bands", 
     
     #TODO NEW RUN: Updated run_name and update selection of model and data
     # Model and data 
@@ -16,9 +16,9 @@ CONFIG = {
     "camera": CameraType.FX10,
     "num_classes": 3,
     "model_type": defined_models[3],
-    "bands": [224, 30, 10, 3][0],
+    "bands": [224, 30, 10, 3][1],
     "band_selection": [None, (700, 1100)][0],
-    "band_reduction": defined_band_reduction_strategies[0],
+    "band_reduction": defined_band_reduction_strategies[3],
     "img_size": [(224, 224), (64, 64)][0],
     
     # Hyperparameters
