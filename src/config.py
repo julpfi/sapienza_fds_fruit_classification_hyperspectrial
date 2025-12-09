@@ -24,7 +24,7 @@ CONFIG = {
     # Hyperparameters
     "batch_size": 16,
     "epochs": 30,
-    "lr": 1e-4,
+    "lr": 1e-3,
     "num_workers": 2,
     
     # Paths (mounted drive)
