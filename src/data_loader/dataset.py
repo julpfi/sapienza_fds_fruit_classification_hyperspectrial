@@ -67,8 +67,11 @@ class HyperspectralFruitDataset(Dataset):
     
         img_data = self.band_selector(img_data)
         img_data = self.band_reducer(img_data)
+
+        if isinstance(img_data, np.ndarray):
+            img_data = img_data.astype(np.float32)
         tensor = self.transform(img_data)
-        
+        tensor = tensor.float()
         return tensor, torch.tensor(sample['label'], dtype=torch.long)
     
 
