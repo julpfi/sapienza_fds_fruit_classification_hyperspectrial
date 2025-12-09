@@ -20,7 +20,7 @@ class BandReducer:
         elif self.strategy == 'average':
             return self._average(img_data)
             
-        elif self.strategy == 'gaussian':
+        elif self.strategy == 'gaussian_average':
             return self._gaussian_average(img_data, c)
     
         else: 
