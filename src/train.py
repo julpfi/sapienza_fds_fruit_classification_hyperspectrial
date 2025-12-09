@@ -6,39 +6,12 @@ import timm
 import wandb
 from tqdm import tqdm
 from datetime import datetime
-from src.config import set_seed
+from src.utils.seed import set_seed
 
 from src.models.models import get_model
 from src.data_loader.data_loader import get_data_loader
-from src.data_loader.utils.enums import FruitType, CameraType, DatasetSplit
-
-#-------------------- Configuration -------------------------
-
-CONFIG = {
-    # Names for wandd 
-    "project_name": "sapienza_fds_fruit_ripeness",
-    "run_name": "Attention CNN Model - all bands wiht first conv",
-    
-    # Model and data 
-    "model_type": "attention_combined_cnn",
-    "fruit": FruitType.KIWI,
-    "camera": CameraType.FX10,
-    "bands": 224,
-    "band_selection": None,
-    "band_reduction": all,
-    "img_size": (224, 224),
-    
-    # Hyperparameters
-    "batch_size": 16,
-    "epochs": 30,
-    "lr": 1e-4,
-    "num_workers": 2,
-    
-    # Paths (mounted drive)
-    "data_root": "/content/drive/MyDrive/sapienza_fds_fruit_classification/data",
-    "json_root": "/content/drive/MyDrive/sapienza_fds_fruit_classification/data/dataset",
-    "save_dir": "/content/drive/MyDrive/sapienza_fds_fruit_classification/checkpoints"
-}
+from src.data_loader.utils.enums import DatasetSplit
+from src.config import CONFIG
 
 
 #-------------------- Helpers -------------------------
@@ -82,13 +55,7 @@ def train():
     test_loader  = get_data_loader(CONFIG, DatasetSplit.TEST,  shuffle=False)
     
     # Get model 
-    # TODO Work on wrapper and passsing of arguemtns (somewhere more advanced logic for handling model requ.?)
-    model = get_model(
-        CONFIG['model_type'], 
-        pretrained=False, 
-        num_classes=3, 
-        in_channels=CONFIG['bands'])
-
+    model = get_model(CONFIG)
     model = model.to(device)
     
     # TODO Try out different optimizers and maybe losses? 
