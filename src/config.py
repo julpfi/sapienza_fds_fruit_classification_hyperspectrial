@@ -1,7 +1,7 @@
 from src.data_loader.utils.enums import FruitType, CameraType
 
-defined_models = {0:"deit", 1: "deit_undist", 2: "vit", 3:"attention_cnn"}
-defined_band_reduction_strategies = {0:"all", 1:"uniform",2:"average", 3:"gaussian_average"}
+defined_models = {0:"deit", 1: "deit_undist", 2: "vit", 3:"attention_cnn", 4:"lit_spectral_transformer" ,5:"fruiths_net"}
+defined_band_reduction_strategies = {0:"all", 1:"uniform", 2:"average", 3:"gaussian_average"}
 
 
 CONFIG = {
