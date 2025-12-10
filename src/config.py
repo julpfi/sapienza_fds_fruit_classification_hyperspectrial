@@ -1,6 +1,6 @@
 from src.data_loader.utils.enums import FruitType, CameraType
 
-defined_models = {0:"fruiths_net", 1: "hybrid", 2: "swin", 3:"deit", 4:"lit_spectral_transformer" ,5:""}
+defined_models = {0:"fruiths_net", 1: "hybrid", 2: "swin", 3:"deit", 4:"lit_spectral_transformer"}
 defined_band_reduction_strategies = {0:"all", 1:"uniform", 2:"average", 3:"gaussian_average", 4:"dft"}
 
 
@@ -8,11 +8,11 @@ CONFIG = {
     
     # Names for wandd 
     "project_name": "sapienza_fds_fruit_ripeness",
-    "run_name": "papaya_attention_cnn_30bands_dft", 
+    "run_name": "kiwi_swin_gassuan_30bands", 
     
     #TODO NEW RUN: Updated run_name and update selection of model and data
     # Model and data 
-    "fruit": FruitType.PAPAYA,
+    "fruit": FruitType.KIWI,
     "camera": CameraType.FX10,
     "num_classes": 3,
     "model_type": defined_models[2],
