@@ -2,22 +2,18 @@ import torch
 import torch.nn as nn
 import timm
 
-
 class SwinModel(nn.Module):
     def __init__(self, num_classes=3, in_channels=30, pretrained=True, 
                  drop_rate=0.0, drop_path_rate=0.1):
         super().__init__()
         
         # load pretrained swin transformer model 
-        # drop_rate = dropout before class. head
-        # drop_path_rate = dropout of transformer layers  
-
         self.swin = timm.create_model(
             'swin_tiny_patch4_window7_224', 
             pretrained=pretrained, 
-            num_classes=0,            # Remove head
-            drop_rate=drop_rate,      # Head dropout
-            drop_path_rate=drop_path_rate # Transformer layer dropout
+            num_classes=0,                  # Remove head
+            drop_rate=drop_rate,            # Head dropout
+            drop_path_rate=drop_path_rate   # Transformer layer dropout
         )
         
         # Adapter from in_channels to swin embedding dimension
@@ -45,16 +41,17 @@ class SwinModel(nn.Module):
 
         self._freeze_layers()
 
+
     def _freeze_layers(self):
         # Freeze all
         for param in self.swin.parameters():
             param.requires_grad = False
             
-        # Unfreeze embedding prohection 
+        # Unfreeze embedding projection 
         for param in self.swin.patch_embed.proj.parameters():
             param.requires_grad = True
             
-        # Unfreeze normalization layers
+        # Unfreeze normalization layers (CRITICAL for Swin)
         for name, param in self.swin.named_parameters():
             if "norm" in name:
                 param.requires_grad = True
@@ -65,14 +62,17 @@ class SwinModel(nn.Module):
 
 
     def forward(self, x):
-
+        # x shape: (Batch, 30, h, w)
+        # Swin Output is typically (Batch, Height, Width, Channels)
         features = self.swin.forward_features(x)
     
-        if features.ndim == 3:
+        # Standard swin
+        if features.ndim == 4:
+            features = features.mean(dim=(1, 2))
+            
+        # Flattened output 
+        elif features.ndim == 3:
             features = features.mean(dim=1)
-        # Fix? 
-        elif features.ndim == 4:
-            features = features.mean(dim=(2, 3))
             
         x = self.head_drop(features)
         return self.head(x)

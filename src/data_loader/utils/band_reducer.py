@@ -2,7 +2,7 @@ import numpy as np
 from scipy.stats import norm
 
 class BandReducer:
-    def __init__(self, strategy='all', target_bands:int|list[int]=None):
+    def __init__(self, strategy='all', target_bands:int=None):
         self.strategy = strategy
         self.target_bands = target_bands
 
@@ -10,9 +10,10 @@ class BandReducer:
         # TODO Think about and add strategies -> aligned with models (e.g. also PCA again)
         h, w, c = img_data.shape
 
+        print(f"BadnReducer Initialized: Applying strategy {self.strategy} gettings {self.target_bands} bands\n")
         if self.strategy == 'uniform':
             # Select k bands evenly spaced across the spectrum
-            indices = np.linspace(0, c - 1, int(self.target_bands), dtype=int)
+            indices = np.linspace(0, c - 1, self.target_bands, dtype=int)
             return img_data[:, :, indices]
 
         elif self.strategy == 'average':
