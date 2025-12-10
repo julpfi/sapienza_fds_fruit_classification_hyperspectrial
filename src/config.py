@@ -1,6 +1,6 @@
 from src.data_loader.utils.enums import FruitType, CameraType
 
-defined_models = {0:"deit", 1: "deit_undist", 2: "vit", 3:"attention_cnn", 4:"lit_spectral_transformer" ,5:"fruiths_net"}
+defined_models = {0:"fruiths_net", 1: "hybrid", 2: "swin", 3:"deit", 4:"lit_spectral_transformer" ,5:""}
 defined_band_reduction_strategies = {0:"all", 1:"uniform", 2:"average", 3:"gaussian_average", 4:"dft"}
 
 
@@ -15,7 +15,7 @@ CONFIG = {
     "fruit": FruitType.PAPAYA,
     "camera": CameraType.FX10,
     "num_classes": 3,
-    "model_type": defined_models[3],
+    "model_type": defined_models[2],
     "bands": [224, 30, 10, 3][1],
     "band_selection": [None, (700, 1100)][0],
     "band_reduction": defined_band_reduction_strategies[3],

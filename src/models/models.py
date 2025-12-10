@@ -1,8 +1,8 @@
 from src.models.deit_model import DeiTModel
-from src.models.vit_model import VitModel
-from src.models.attention_cnn_model import AttentionCNNSelected, AttentionCNNModelUnselected
+from src.models.hybrid_model import HybridModel
 from src.models.lit_spectral_transformer import LitSpectralTransformer
 from src.models.fruiths_net import FruitHSNet 
+from src.models.swin_model import SwinSpectralModel
 
 def get_model(config: dict):
     num_classes = config.get("num_classes", 3)
@@ -18,16 +18,13 @@ def get_model(config: dict):
     elif model_type == "lit_spectral_transformer":
         return LitSpectralTransformer(bands=in_channels, num_classes=num_classes)
 
-    elif model_type in ["deit", "deit_undist"]:
-        return DeiTModel(pretrained=True, use_distillation=(model_type=="deit"), num_classes=num_classes, input_bands=in_channels)
+    elif model_type == "deit": 
+        return DeiTModel(pretrained=True, num_classes=num_classes, in_channels=in_channels)
     
-    elif model_type == "vit":
-        return VitModel(pretrained=True, num_classes=num_classes, in_channels=in_channels)
+    elif model_type == "hybrid": # Two version: first cnn layer as band reducer or already reduced bands as input 
+        return HybridModel(in_channels=in_channels, num_classes=num_classes, reduce_bands=(reduction_strategy == "all"))
     
-    elif model_type == "attention_cnn":
-        if reduction_strategy == "all" and in_channels > 30:
-            return AttentionCNNModelUnselected(num_bands=in_channels, num_classes=num_classes)
-        elif reduction_strategy != "all" and in_channels in [30, 10]: 
-            return AttentionCNNSelected(num_bands=in_channels, num_classes=num_classes)
+    elif model_type == "swin":
+        return SwinSpectralModel(num_classes=num_classes, in_channels=in_channels, pretrained=True)
     
     raise ValueError(f"Unsupported model type: {model_type} or incompatible band reduction strategy: {reduction_strategy} for in_channels: {in_channels}")
