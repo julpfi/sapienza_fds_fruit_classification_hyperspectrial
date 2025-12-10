@@ -2,7 +2,7 @@ from src.models.deit_model import DeiTModel
 from src.models.hybrid_model import HybridModel
 from src.models.lit_spectral_transformer import LitSpectralTransformer
 from src.models.fruiths_net import FruitHSNet 
-from src.models.swin_model import SwinSpectralModel
+from src.models.swin_model import SwinModel
 
 def get_model(config: dict):
     num_classes = config.get("num_classes", 3)
@@ -25,6 +25,6 @@ def get_model(config: dict):
         return HybridModel(in_channels=in_channels, num_classes=num_classes, reduce_bands=(reduction_strategy == "all"))
     
     elif model_type == "swin":
-        return SwinSpectralModel(num_classes=num_classes, in_channels=in_channels, pretrained=True)
+        return SwinModel(num_classes=num_classes, in_channels=in_channels, pretrained=True)
     
     raise ValueError(f"Unsupported model type: {model_type} or incompatible band reduction strategy: {reduction_strategy} for in_channels: {in_channels}")
