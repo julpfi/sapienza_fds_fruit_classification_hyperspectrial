@@ -3,12 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class HybridModel(nn.Module):
-    def __init__(self, 
-                 input_bands=30, 
-                 num_classes=3, 
-                 reduce_bands=False, 
-                 cnn_channels=32, 
-                 transformer_grid_size=4):
+    def __init__(self, in_channels=30, num_classes=3, reduce_bands=False, cnn_channels=32, transformer_grid_size=4):
         
         super().__init__()
         self.reduce_bands = reduce_bands
@@ -18,7 +13,7 @@ class HybridModel(nn.Module):
         
         if self.reduce_bands:
             # Learnable reduction: 224 -> 32
-            self.spectral_reduce = nn.Conv2d(in_channels=input_bands, out_channels=cnn_channels, kernel_size=1)
+            self.spectral_reduce = nn.Conv2d(in_channels=in_channels, out_channels=cnn_channels, kernel_size=1)
             self.bn_spectral = nn.BatchNorm2d(cnn_channels)
             
             # Adapt next layer input channels
@@ -27,7 +22,7 @@ class HybridModel(nn.Module):
             # No reduction layer. The next layer receives the input directly.
             self.spectral_reduce = nn.Identity()
             self.bn_spectral = nn.Identity()
-            current_in_channels = input_bands
+            current_in_channels = in_channels
 
         #  Spatial CNN layers 
         # Layer 1

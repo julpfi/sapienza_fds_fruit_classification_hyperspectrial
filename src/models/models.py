@@ -25,6 +25,6 @@ def get_model(config: dict):
         return HybridModel(in_channels=in_channels, num_classes=num_classes, reduce_bands=(reduction_strategy == "all"))
     
     elif model_type == "swin":
-        return SwinModel(num_classes=num_classes, in_channels=in_channels, pretrained=True)
+        return SwinModel(in_channels=in_channels, num_classes=num_classes,pretrained=True)
     
     raise ValueError(f"Unsupported model type: {model_type} or incompatible band reduction strategy: {reduction_strategy} for in_channels: {in_channels}")

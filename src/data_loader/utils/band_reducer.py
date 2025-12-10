@@ -10,7 +10,6 @@ class BandReducer:
     def __call__(self, img_data):
         # TODO Think about and add strategies -> aligned with models (e.g. also PCA again)
         h, w, c = img_data.shape
-
         
         if self.strategy == 'uniform':
             # Select k bands evenly spaced across the spectrum
