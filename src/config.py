@@ -16,7 +16,7 @@ CONFIG = {
     "camera": CameraType.FX10,
     "num_classes": 3,
     "model_type": defined_models[4],
-    "bands": [224, 30, 10, 3][1],
+    "bands": [224, 30, 10, 3][0],
     "band_selection": [None, (700, 1100)][0],
     "band_reduction": defined_band_reduction_strategies[0],
     "img_size": [(224, 224), (64, 64)][0],
