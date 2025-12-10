@@ -70,6 +70,9 @@ class SwinModel(nn.Module):
     
         if features.ndim == 3:
             features = features.mean(dim=1)
+        # Fix? 
+        elif features.ndim == 4:
+            features = features.mean(dim=(2, 3))
             
         x = self.head_drop(features)
         return self.head(x)
