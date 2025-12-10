@@ -8,7 +8,7 @@ CONFIG = {
     
     # Names for wandd 
     "project_name": "sapienza_fds_fruit_ripeness",
-    "run_name": "AttentionCNN (Updated) with Gaussian Average", 
+    "run_name": "papaya_lit_spectral_transformer_allbands_224px_30epochs", 
     
     #TODO NEW RUN: Updated run_name and update selection of model and data
     # Model and data 
@@ -23,7 +23,7 @@ CONFIG = {
     
     # Hyperparameters
     "batch_size": 16,
-    "epochs": 20,
+    "epochs": 30,
     "lr": 1e-4,
     "num_workers": 2,
     
