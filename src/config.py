@@ -8,11 +8,11 @@ CONFIG = {
     
     # Names for wandd 
     "project_name": "sapienza_fds_fruit_ripeness",
-    "run_name": "kiwi_swin_gassuan_30bands", 
+    "run_name": "avocado_30bands_dft", 
     
     #TODO NEW RUN: Updated run_name and update selection of model and data
     # Model and data 
-    "fruit": FruitType.KIWI,
+    "fruit": FruitType.AVOCADO,
     "camera": CameraType.FX10,
     "num_classes": 3,
     "model_type": defined_models[2],
