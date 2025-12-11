@@ -25,7 +25,7 @@ LABEL_MAP = {
 }
 
 SPLIT_FILES = {
-    DatasetSplit.TRAIN: "train_clean.json", # We only use labeled training data
-    DatasetSplit.VAL: "val_clean.json",
-    DatasetSplit.TEST: "test_clean.json"
+    DatasetSplit.TRAIN: "train_only_labeled.json", # We only use labeled training data
+    DatasetSplit.VAL: "val.json",
+    DatasetSplit.TEST: "test.json"
 }
