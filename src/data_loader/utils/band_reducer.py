@@ -23,7 +23,10 @@ class BandReducer:
             return self._gaussian_average(img_data, c)
 
         elif self.strategy == 'dft':
-            return self._discrete_fourier_transformation(img_data)
+            return self._discrete_fourier_transformation(img_data) 
+        
+        elif self.strategy == 'dft_complex':
+            return self._discrete_fourier_transformation_complex(img_data)
         
         else: 
          return img_data
@@ -93,4 +96,22 @@ class BandReducer:
         # Discard phase as we care about the signal's energy and not its shift
         reduced_img = np.log(np.abs(fft_reduced) + 1e-6)   # use log magnitue to handle potentially large diff. of magnitudes 
 
+        return reduced_img
+    
+
+    def _discrete_fourier_transformation_complex(self, img_data):
+        fft_data = np.fft.rfft(img_data, axis=2)
+        fft_reduced = fft_data[:, :, :self.target_bands]
+
+        # Get real and imaginary parts
+        real_part = np.real(fft_reduced)
+        imag_part = np.imag(fft_reduced)
+        
+        # We apply log compression to the values while preserving sign/direction
+        # A common trick is signed-log: sign(x) * log(|x| + 1)
+        real_log = np.sign(real_part) * np.log(np.abs(real_part) + 1e-6)
+        imag_log = np.sign(imag_part) * np.log(np.abs(imag_part) + 1e-6)
+
+        reduced_img = np.concatenate([real_log, imag_log], axis=2)
+        
         return reduced_img

@@ -16,13 +16,15 @@ def get_model(config: dict):
         return FruitHSNet(num_bands=in_channels, num_classes=num_classes, use_3x3_center=True)
     
     elif model_type == "lit_spectral_transformer":
-        return LitSpectralTransformer(bands=in_channels, num_classes=num_classes)
+        return LitSpectralTransformer(bands=in_channels, num_classes=num_classes
+                                      , is_complex_dft_reduce=(reduction_strategy=="dft_complex")) # Variation dft with real and imag. part -> 1d conv takes 2 channels as input
 
     elif model_type == "deit": 
         return DeiTModel(pretrained=True, num_classes=num_classes, in_channels=in_channels)
     
     elif model_type == "hybrid": # Two version: first cnn layer as band reducer or already reduced bands as input 
-        return HybridModel(in_channels=in_channels, num_classes=num_classes, reduce_bands=(reduction_strategy == "all"))
+        return HybridModel(in_channels=in_channels, num_classes=num_classes
+                           , reduce_bands=(reduction_strategy == "all")) # Variation: All bands (no band reduction) -> one more cnn layer for reduction
     
     elif model_type == "swin":
         return SwinModel(in_channels=in_channels, num_classes=num_classes,pretrained=True)
