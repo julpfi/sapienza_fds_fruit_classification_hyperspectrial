@@ -26,6 +26,6 @@ LABEL_MAP = {
 
 SPLIT_FILES = {
     DatasetSplit.TRAIN: "train_avocado_kiwi_vis.json", # We only use labeled training data
-    DatasetSplit.VAL: "val_avocado__kiwi_vis.json",
+    DatasetSplit.VAL: "val_avocado_kiwi_vis.json",
     DatasetSplit.TEST: "test_avocado_kiwi_vis.json"
 }
