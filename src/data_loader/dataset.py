@@ -138,7 +138,7 @@ class HyperspectralFruitDataset(Dataset):
                 transforms.ToTensor(), # (H, W, C) -> (C, H, W)
                 transforms.RandomResizedCrop(
                     size=self.img_size, 
-                    scale=(0.5, 1.0), 
+                    scale=(0.7, 1.0), 
                     ratio=(0.9, 1.1),
                     antialias=True
                 ),
