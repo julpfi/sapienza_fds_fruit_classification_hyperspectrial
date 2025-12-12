@@ -37,7 +37,7 @@ def mask_background(img_data, threshold=0.1):
     return img_data
 
 
-def crop_border_pixels(img_data, border_x=100, border_y=10):
+def crop_border_pixels(img_data, border_x=10, border_y=10):
     """
     Removes the borders pixels of height border_y and width border_x of spatioal dimension if images 
     This was done in the original paper to remove the conveyor belt remains 
@@ -65,7 +65,7 @@ def load_and_preprocess(header_path, bin_path):
 
     # Clean
     img_data = mask_background(img_data)
-    img_data = crop_border_pixels(img_data)
+    # img_data = crop_border_pixels(img_data)
 
     return img_data
 

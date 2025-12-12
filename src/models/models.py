@@ -9,6 +9,7 @@ def get_model(config: dict):
     in_channels = config.get("bands", 224)
     model_type = config.get("model_type", "attention_cnn")
     reduction_strategy = config.get("band_reduction", "all")
+    image_size = config.get("img_size", (224, 224))
 
     # Check for Fruit-HSNet
     if model_type == "fruiths_net":
@@ -19,14 +20,14 @@ def get_model(config: dict):
         return LitSpectralTransformer(bands=in_channels, num_classes=num_classes
                                       , is_complex_dft_reduce=(reduction_strategy=="dft_complex")) # Variation dft with real and imag. part -> 1d conv takes 2 channels as input
 
-    elif model_type == "deit": 
+    elif model_type == "deit" and image_size == (224, 224): 
         return DeiTModel(pretrained=True, num_classes=num_classes, in_channels=in_channels)
     
     elif model_type == "hybrid": # Two version: first cnn layer as band reducer or already reduced bands as input 
         return HybridModel(in_channels=in_channels, num_classes=num_classes
                            , reduce_bands=(reduction_strategy == "all")) # Variation: All bands (no band reduction) -> one more cnn layer for reduction
     
-    elif model_type == "swin":
+    elif model_type == "swin" and image_size == (224, 224):
         return SwinModel(in_channels=in_channels, num_classes=num_classes,pretrained=True)
     
     raise ValueError(f"Unsupported model type: {model_type} or incompatible band reduction strategy: {reduction_strategy} for in_channels: {in_channels}")

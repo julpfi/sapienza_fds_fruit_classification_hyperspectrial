@@ -131,20 +131,25 @@ class HyperspectralFruitDataset(Dataset):
 
     def _get_transforms(self, is_train=False):
         '''
-        Retruns torchvision transforms for data augmentatiion and preprocessing 
+         Retruns torchvision transforms for data augmentatiion and preprocessing 
         '''
-        # TODO Work on augmentattion after model implementation 
         if is_train:
             return transforms.Compose([
-                transforms.ToTensor(),
-                #transforms.Resize(self.img_size, antialias=True),
-                transforms.RandomResizedCrop(size=self.img_size, scale=(0.8, 1.0), antialias=True),
+                transforms.ToTensor(), # (H, W, C) -> (C, H, W)
+                transforms.RandomResizedCrop(
+                    size=self.img_size, 
+                    scale=(0.5, 1.0), 
+                    ratio=(0.9, 1.1),
+                    antialias=True
+                ),
                 transforms.RandomHorizontalFlip(p=0.5),
                 transforms.RandomVerticalFlip(p=0.5),
-                transforms.RandomRotation(degrees=180),
+                transforms.RandomRotation(degrees=90),
             ])
+            
         else:
             return transforms.Compose([
                 transforms.ToTensor(),
-                transforms.Resize(self.img_size, antialias=True)
+                transforms.Resize(self.img_size[0], antialias=True),
+                transforms.CenterCrop(self.img_size)
             ])

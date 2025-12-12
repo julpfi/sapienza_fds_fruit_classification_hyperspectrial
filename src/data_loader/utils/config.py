@@ -7,11 +7,11 @@ CAMERA_SPECS = {
     },
     CameraType.REDEYE: {
         "description": "Innospec Redeye (950-1700 nm)",
-        "total_bands": 252,
+        "total_bands": 249,
     },
     CameraType.MICRO_HSI: {
         "description": "Corning MicroHSI",
-        "total_bands": 150, # TODO CHECK EXACT NUMBER
+        "total_bands": 252,
     }
 }
 
