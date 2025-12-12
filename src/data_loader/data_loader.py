@@ -13,7 +13,7 @@ def get_data_loader(CONFIG:dict, split: DatasetSplit, shuffle=False):
     """
 
     # Resolve JSON path
-    json_filename = SPLIT_FILES[split]
+    json_filename = SPLIT_FILES[split][CONFIG['fruit']]
     json_path = os.path.join(CONFIG['json_root'], json_filename)
     
     print(f"Loading {split.name} data from: {json_filename}")

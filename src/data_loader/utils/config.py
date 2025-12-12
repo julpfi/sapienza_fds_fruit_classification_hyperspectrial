@@ -1,4 +1,4 @@
-from src.data_loader.utils.enums import CameraType, RipenessLabel, DatasetSplit
+from src.data_loader.utils.enums import CameraType, RipenessLabel, DatasetSplit, FruitType
 
 CAMERA_SPECS = {
     CameraType.FX10: {
@@ -24,8 +24,20 @@ LABEL_MAP = {
     "near_overripe": RipenessLabel.OVERRIPE.value 
 }
 
+# We only use labeled training data
+# Insights to strucutre: 
+# We have identified issue with the from the author given split, duplicate records, and non matching number of records according to the papers
+# We have fixed these with another script random creating splitting into train/test/val while ensuring same fruits are in the same set
+# Somehow we have issues with merging the newly created files together and looked into the issue 
+# As a simple workaround (as we effectivly focus in FX10 adn Acocado/Kiwi) we create this dict of dicts to route to the new paths. 
 SPLIT_FILES = {
-    DatasetSplit.TRAIN: "train_avocado_kiwi_vis.json", # We only use labeled training data
-    DatasetSplit.VAL: "val_avocado_kiwi_vis.json",
-    DatasetSplit.TEST: "test_avocado_kiwi_vis.json"
+    DatasetSplit.TRAIN: 
+        {FruitType.AVOCADO : "train_avocado_vis.json",
+         FruitType.KIWI: "train_kiwi_vis.json"}, 
+    DatasetSplit.VAL: 
+        {FruitType.AVOCADO : "val_avocado_vis.json",
+         FruitType.KIWI: "val_kiwi_vis.json"}, 
+    DatasetSplit.TEST: 
+        {FruitType.AVOCADO : "test_avocado_vis.json",
+         FruitType.KIWI: "test_kiwi_vis.json"}
 }
