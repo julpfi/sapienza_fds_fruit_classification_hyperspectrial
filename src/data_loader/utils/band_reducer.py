@@ -91,6 +91,6 @@ class BandReducer:
 
         # Calculate the magnitue = absolute value of wave coefficients 
         # Discard phase as we care about the signal's energy and not its shift
-        reduced_img = np.abs(fft_reduced)
+        reduced_img = np.log(np.abs(fft_reduced) + 1e-6)   # use log magnitue to handle potentially large diff. of magnitudes 
 
         return reduced_img
