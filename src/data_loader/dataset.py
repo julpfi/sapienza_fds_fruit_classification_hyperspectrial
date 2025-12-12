@@ -21,7 +21,7 @@ class HyperspectralFruitDataset(Dataset):
                  band_selection=None,
                  band_reduction='uniform', 
                  target_bands=30, 
-                 img_size=(64, 64)):
+                 img_size=(224, 224)):
 
         """
         Args:
