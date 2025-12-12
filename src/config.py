@@ -8,7 +8,7 @@ CONFIG = {
     
     # Names for wandd 
     "project_name": "sapienza_fds_fruit_ripeness",
-    "run_name": "avocado_30bands_gaussian_lit", 
+    "run_name": "avocado_30bands_dft_lit", 
     
     #TODO NEW RUN: Updated run_name and update selection of model and data
     # Model and data 
