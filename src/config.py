@@ -18,7 +18,7 @@ CONFIG = {
     "model_type": defined_models[2],
     "bands": [224, 30, 10, 3][1],
     "band_selection": [None, (700, 1100)][0],
-    "band_reduction": defined_band_reduction_strategies[2],
+    "band_reduction": defined_band_reduction_strategies[4],
     "img_size": [(224, 224), (64, 64)][0],
     
     # Hyperparameters
