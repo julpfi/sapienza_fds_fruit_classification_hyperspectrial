@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.fft
 
 class SpecSpatFTModel(nn.Module):
-    def __init__(self, in_channels=30, num_classes=3, crop_size=16):
+    def __init__(self, in_channels=60, num_classes=3, crop_size=16):
         super().__init__()
         self.crop = crop_size
 
@@ -11,17 +11,33 @@ class SpecSpatFTModel(nn.Module):
         # Init with 1 instead of random to not have a random initla bias for some frequencies; Tryout
         self.freq_weight = nn.Parameter(torch.ones(1, in_channels, crop_size, crop_size))
         
-        flat_dim = in_channels * crop_size * crop_size
-      
+        # We use a conv layer before flattened classificatio to reduce number of paramteres 
+        self.features = nn.Sequential(
+            nn.Conv2d(in_channels, 64, kernel_size=3, padding=1),
+            nn.BatchNorm2d(64),
+            nn.ReLU(),
+            nn.MaxPool2d(2),
+
+            nn.Conv2d(64, 128, kernel_size=3, padding=1),
+            nn.BatchNorm2d(128),
+            nn.ReLU(),
+            nn.MaxPool2d(2)
+        )
+        
+        final_size = crop_size // 4
+        flat_dim = 128 * final_size * final_size
+
         # Classification head    
         self.classifier = nn.Sequential(
             nn.Flatten(),
             nn.Linear(flat_dim, 256),
-            nn.LayerNorm(256),  # Normalize magnitude variance
+            nn.LayerNorm(256),
             nn.ReLU(),
-            nn.Dropout(0.6),    # Heavy dropout for small data (Increased to 0.6)
+            nn.Dropout(0.4),
             nn.Linear(256, num_classes)
         )
+        
+
 
     def forward(self, x):
         # x = (Batch, Channels, Height, Width) 
@@ -46,10 +62,11 @@ class SpecSpatFTModel(nn.Module):
         x_cropped = fft_x[:, :, start_h : start_h+self.crop, start_w : start_w+self.crop]
         
         # Calculate log magnitute of low-filtered waves
-        # Abs. removes phase (=position)
+        # Abs() removes Phase (Position) -> Translation Invariance
         x_mag = torch.log(torch.abs(x_cropped) + 1e-6)
         
         # Weighting the frequencies before classification
         x_weighted = x_mag * self.freq_weight
-        
-        return self.classifier(x_weighted)
+   
+        x_feat = self.features(x_weighted)    
+        return self.classifier(x_feat)
