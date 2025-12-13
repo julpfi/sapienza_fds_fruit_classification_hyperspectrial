@@ -19,7 +19,7 @@ def get_model(config: dict):
     elif model_type == "lit_spectral_transformer":
         is_complex = (reduction_strategy == "dft_complex")
         actual_bands = in_channels * 2 if is_complex else in_channels
-        return LitSpectralTransformer(bands=in_channels, num_classes=num_classes
+        return LitSpectralTransformer(bands=actual_bands, num_classes=num_classes
                                       , is_complex_dft_reduce=is_complex) # Variation dft with real and imag. part -> 1d conv takes 2 channels as input
 
     elif model_type == "deit" and image_size == (224, 224): 
