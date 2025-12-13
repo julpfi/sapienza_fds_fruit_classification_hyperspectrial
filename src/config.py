@@ -1,7 +1,10 @@
 from src.data_loader.utils.enums import FruitType, CameraType
 
-defined_models = {0:"fruiths_net", 1: "hybrid", 2: "swin", 3:"deit", 4:"lit_spectral_transformer", 5: "spec_spat_ft"}
-defined_band_reduction_strategies = {0:"all", 1:"uniform", 2:"average", 3:"gaussian_average", 4:"dft", 5:"dft_complex"}
+defined_models = {0:"deephs", 1: "fruiths_net", 2:"hybrid", 3: "swin", 4:"deit",
+                   5:"lit_spectral_transformer", 6: "spec_spat_ft"}
+
+defined_band_reduction_strategies = {0:"all", 1:"uniform", 2:"average", 
+                                     3:"gaussian_average", 4:"dft", 5:"dft_complex"}
 
 
 CONFIG = {

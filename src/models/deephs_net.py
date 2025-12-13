@@ -1,9 +1,9 @@
 import torch.nn as nn
 
 
-class ClassifierNetwork(nn.Module):
+class DeephsNet(nn.Module):
     def __init__(self, bands):
-        super(ClassifierNetwork, self).__init__()
+        super(DeephsNet, self).__init__()
         self.bands = bands
         kernel_count = 3
 

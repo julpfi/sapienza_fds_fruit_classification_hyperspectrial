@@ -4,6 +4,7 @@ from src.models.lit_spectral_transformer import LitSpectralTransformer
 from src.models.fruiths_net import FruitHSNet 
 from src.models.swin_model import SwinModel
 from src.models.spec_spat_ft_model import SpecSpatFTModel
+from src.models.deephs_net import DeephsNet 
 
 def get_model(config: dict):
     num_classes = config.get("num_classes", 3)
@@ -12,8 +13,12 @@ def get_model(config: dict):
     reduction_strategy = config.get("band_reduction", "all")
     image_size = config.get("img_size", (224, 224))
 
-    # Check for Fruit-HSNet
-    if model_type == "fruiths_net":
+    # BASELINE PAPER 1
+    if model_type == "deephs": 
+        return DeephsNet(bands=in_channels)
+    
+    # BASELINE PAPER 2
+    elif model_type == "fruiths_net":
         # Note: use_3x3_center=True is recommended because we use RandomResizedCrop in dataset.py
         return FruitHSNet(num_bands=in_channels, num_classes=num_classes, use_3x3_center=True)
     
