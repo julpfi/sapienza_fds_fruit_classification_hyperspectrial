@@ -23,7 +23,7 @@ CONFIG = {
     
     # Hyperparameters
     "batch_size": 16,
-    "epochs": 30,
+    "epochs": 25,
     "lr": 1e-4,
     "num_workers": 2,
     
