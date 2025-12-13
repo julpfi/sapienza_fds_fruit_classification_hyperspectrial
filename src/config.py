@@ -8,7 +8,7 @@ CONFIG = {
     
     # Names for wandd 
     "project_name": "sapienza_fds_fruit_ripeness",
-    "run_name": "avocado_30bands_dft_lit", 
+    "run_name": "avocado_30bands_gaussian_lit", 
     
     #TODO NEW RUN: Updated run_name and update selection of model and data
     # Model and data 
@@ -18,7 +18,7 @@ CONFIG = {
     "model_type": defined_models[4],
     "bands": [224, 30, 10, 3][1],
     "band_selection": [None, (700, 1100)][0],
-    "band_reduction": defined_band_reduction_strategies[4],
+    "band_reduction": defined_band_reduction_strategies[3],
     "img_size": [(224, 224), (64, 64)][0],
     
     # Hyperparameters
