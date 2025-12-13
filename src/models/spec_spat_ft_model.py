@@ -36,7 +36,6 @@ class SpecSpatFTModel(nn.Module):
             nn.Dropout(0.4),
             nn.Linear(256, num_classes)
         )
-        
 
 
     def forward(self, x):
