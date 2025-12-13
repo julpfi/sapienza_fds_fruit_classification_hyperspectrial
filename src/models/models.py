@@ -3,6 +3,7 @@ from src.models.hybrid_model import HybridModel
 from src.models.lit_spectral_transformer import LitSpectralTransformer
 from src.models.fruiths_net import FruitHSNet 
 from src.models.swin_model import SwinModel
+from src.models.spec_spat_ft_model import SpecSpatFTModel
 
 def get_model(config: dict):
     num_classes = config.get("num_classes", 3)
@@ -31,5 +32,9 @@ def get_model(config: dict):
     
     elif model_type == "swin" and image_size == (224, 224):
         return SwinModel(in_channels=in_channels, num_classes=num_classes,pretrained=True)
+    
+    elif model_type == "spec_spat_ft" and reduction_strategy == "dft_complex": 
+        crop_size = 16 if image_size == (64, 64) else 48
+        return SpecSpatFTModel(num_classes=num_classes, in_channels=in_channels,crop_size=crop_size)
     
     raise ValueError(f"Unsupported model type: {model_type} or incompatible band reduction strategy: {reduction_strategy} for in_channels: {in_channels}")
