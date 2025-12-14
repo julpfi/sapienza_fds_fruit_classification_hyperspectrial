@@ -39,5 +39,5 @@ SPLIT_FILES = {
          FruitType.KIWI: "val_kiwi_grouped.json"}, 
     DatasetSplit.TEST: 
         {FruitType.AVOCADO : "test_avocado_grouped.json",
-         FruitType.KIWI: "test_kiwi_grouped.j son"}
+         FruitType.KIWI: "test_kiwi_grouped.json"}
 }
