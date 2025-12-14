@@ -136,15 +136,16 @@ class HyperspectralFruitDataset(Dataset):
         if is_train:
             return transforms.Compose([
                 transforms.ToTensor(), # (H, W, C) -> (C, H, W)
-                transforms.Resize(self.img_size, antialias=True),
+               
 
                 # TODO Assess diff of resize adn ranrezisecrop
-                #transforms.RandomResizedCrop(
-                #    size=self.img_size, 
-                #    scale=(0.9, 1.0), 
-                #    ratio=(0.95, 1.05),
-                #    antialias=True
-                #),
+                 # transforms.Resize(self.img_size, antialias=True),
+                transforms.RandomResizedCrop(
+                    size=self.img_size, 
+                    scale=(0.9, 1.0), 
+                    ratio=(0.95, 1.05),
+                    antialias=True
+                ),
                 transforms.RandomHorizontalFlip(p=0.5),
                 transforms.RandomVerticalFlip(p=0.5),
                 transforms.RandomRotation(degrees=90),   
