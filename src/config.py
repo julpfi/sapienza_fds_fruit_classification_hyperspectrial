@@ -22,7 +22,7 @@ CONFIG = {
     "bands": [224, 30, 10, 3][1],
     "band_selection": [None, (700, 1100)][0],
     "band_reduction": defined_band_reduction_strategies[3],
-    "img_size": [(224, 224), (64, 64)][1],   # deit and swin take only 224x224
+    "img_size": [(224, 224), (64, 64)][0],   # deit and swin take only 224x224
     
     # Hyperparameters
     "batch_size": 16,
