@@ -32,7 +32,7 @@ class DeiTModel(nn.Module):
             # We init. the other 27 weights based on random selected rgb weight plus random noise 
             rgb_weights = old_proj.weight
 
-            random_indices = torch.randint(0, 3, in_channels - 3)
+            random_indices = torch.randint(0, 3, (in_channels - 3,))
             selected_weights = rgb_weights[:, random_indices, :, :]
   
             noise = torch.randn_like(selected_weights) * (0.1 * selected_weights.std())
