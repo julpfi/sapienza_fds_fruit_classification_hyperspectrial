@@ -22,7 +22,7 @@ def get_model(config: dict):
         # Note: use_3x3_center=True is recommended because we use RandomResizedCrop in dataset.py
         return FruitHSNet(num_bands=in_channels, num_classes=num_classes, use_3x3_center=True)
     
-    elif model_type == "lit_spectral_transformer":
+    elif model_type == "lit":
         is_complex = (reduction_strategy == "dft_complex")
         actual_channels = in_channels * 2 if is_complex else in_channels
         return LitSpectralTransformer(bands=actual_channels, num_classes=num_classes
