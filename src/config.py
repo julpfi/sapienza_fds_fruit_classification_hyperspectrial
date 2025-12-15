@@ -11,14 +11,14 @@ CONFIG = {
     
     # Names for wandd 
     "project_name": "sapienza_fds_fruit_ripeness",
-    "run_name": "avocado_30bands_deit_dft", 
+    "run_name": "avocado_30bands_swin_dft", 
     
     #TODO NEW RUN: Updated run_name and update selection of model and data
     # Model and data 
     "fruit": FruitType.AVOCADO,
     "camera": CameraType.FX10,  #We will only use the FX10
     "num_classes": 3,
-    "model_type": defined_models[4],
+    "model_type": defined_models[3],
     "bands": [224, 30, 10, 3][1],
     "band_selection": [None, (700, 1100)][0],
     "band_reduction": defined_band_reduction_strategies[4],
