@@ -32,12 +32,12 @@ LABEL_MAP = {
 # As a simple workaround (as we effectivly focus in FX10 adn Acocado/Kiwi) we create this dict of dicts to route to the new paths. 
 SPLIT_FILES = {
     DatasetSplit.TRAIN: 
-        {FruitType.AVOCADO : "train_avocado_grouped.json",
+        {FruitType.AVOCADO : "train_only_labeled.json",
          FruitType.KIWI: "train_kiwi_grouped.json"}, 
     DatasetSplit.VAL: 
-        {FruitType.AVOCADO : "val_avocado_grouped.json",
+        {FruitType.AVOCADO : "val.json",
          FruitType.KIWI: "val_kiwi_grouped.json"}, 
     DatasetSplit.TEST: 
-        {FruitType.AVOCADO : "test_avocado_grouped.json",
+        {FruitType.AVOCADO : "test.json",
          FruitType.KIWI: "test_kiwi_grouped.json"}
 }
