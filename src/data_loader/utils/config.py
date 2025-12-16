@@ -30,6 +30,7 @@ LABEL_MAP = {
 # We have fixed these with another script random creating splitting into train/test/val while ensuring same fruits are in the same set
 # Somehow we have issues with merging the newly created files together and looked into the issue 
 # As a simple workaround (as we effectivly focus in FX10 adn Acocado/Kiwi) we create this dict of dicts to route to the new paths. 
+'''
 SPLIT_FILES = {
     DatasetSplit.TRAIN: 
         {FruitType.AVOCADO : "train_only_labeled.json",
@@ -39,5 +40,18 @@ SPLIT_FILES = {
          FruitType.KIWI: "val_kiwi_grouped.json"}, 
     DatasetSplit.TEST: 
         {FruitType.AVOCADO : "test.json",
+         FruitType.KIWI: "test_kiwi_grouped.json"}
+}
+'''
+
+SPLIT_FILES = {
+    DatasetSplit.TRAIN: 
+        {FruitType.AVOCADO : "train_avocado_grouped.json",
+         FruitType.KIWI: "train_kiwi_grouped.json"}, 
+    DatasetSplit.VAL: 
+        {FruitType.AVOCADO : "val_avocado_grouped.json",
+         FruitType.KIWI: "val_kiwi_grouped.json"}, 
+    DatasetSplit.TEST: 
+        {FruitType.AVOCADO : "test_avocado_grouped.json",
          FruitType.KIWI: "test_kiwi_grouped.json"}
 }
